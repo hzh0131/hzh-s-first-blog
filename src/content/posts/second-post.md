@@ -83,6 +83,7 @@ void insert(int ikey,int ival)
 
 int* twoSum(int* nums, int numsSize, int target, int* returnSize)
 {
+    hashtable=NULL;
     for(int i=0;i<numsSize;i++)
     {
         struct hashTable*tmp=NULL;
