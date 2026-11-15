@@ -26,7 +26,7 @@ import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-cop
 
 // 部署地址：默认走 Cloudflare；构建时可用环境变量覆盖（Gitee Pages 需要子路径 + 完整站点地址）
 // 例：SITE_URL="https://hzh0131.gitee.io/hzh-s-first-blog/" BASE_PATH="/hzh-s-first-blog"
-const site = process.env.SITE_URL ?? "https://hzh-s-first-blog.35081313.workers.dev/";
+const site = process.env.SITE_URL ?? "https://hzhblog.cn/";
 const base = process.env.BASE_PATH ?? "/";
 
 // https://astro.build/config
