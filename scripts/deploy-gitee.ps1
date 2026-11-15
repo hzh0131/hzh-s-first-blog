@@ -70,7 +70,13 @@ try {
     git -c user.name="gitee-pages" -c user.email="gitee-pages@local" commit -q -m "deploy: $stamp" --allow-empty
     if ($LASTEXITCODE -ne 0) { throw "git commit 失败" }
     git push -f $remoteUrl "HEAD:refs/heads/$Branch"
-    if ($LASTEXITCODE -ne 0) { throw "git push 失败（检查 Gitee 账号密码 / 仓库是否存在）" }
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "推送失败，常见原因：" -ForegroundColor Yellow
+        Write-Host "  1. Gitee 上还没有 $Repo 这个仓库"
+        Write-Host "  2. 账号或私人令牌不对"
+        Write-Host "  3. 代理把 gitee.com 走了境外节点（报 SSL/TLS 或超时），先把 gitee.com 设为直连再试"
+        throw "git push 失败"
+    }
 }
 finally {
     Pop-Location
