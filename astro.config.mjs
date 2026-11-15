@@ -24,11 +24,21 @@ import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-copy-button.js";
 
+// 部署地址：默认走 Cloudflare；构建时可用环境变量覆盖（Gitee Pages 需要子路径 + 完整站点地址）
+// 例：SITE_URL="https://hzh0131.gitee.io/hzh-s-first-blog/" BASE_PATH="/hzh-s-first-blog"
+const site = process.env.SITE_URL ?? "https://hzh-s-first-blog.35081313.workers.dev/";
+const base = process.env.BASE_PATH ?? "/";
+
 // https://astro.build/config
 export default defineConfig({
-	site: "https://hzh-s-first-blog.35081313.workers.dev/",
-	base: "/",
+	site,
+	base,
 	trailingSlash: "always",
+	// Gitee Pages 用 Jekyll 渲染，会忽略以 "_" 开头的目录（默认的 _astro 会 404），
+	// 所以把静态资源目录改名成 assets
+	build: {
+		assets: "assets",
+	},
 	integrations: [
 		tailwind({
 			nesting: true,
